@@ -29,7 +29,8 @@
 
 @end
 
-@interface ViewController ()<UIAlertViewDelegate>
+@interface ViewController ()
+<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ZXCapture *capture;
 @property (nonatomic, weak) IBOutlet UIView *topContainerView;
@@ -173,6 +174,7 @@
         [self.bottomBtn setTitle:@"Select from Photos" forState:UIControlStateNormal];
         [self.bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        [self.bottomBtn addTarget:self action:@selector(selectFromPhotos) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor whiteColor].CGColor];
     } else {
         [self.capture stop];
@@ -187,17 +189,32 @@
         self.bottomBtn.backgroundColor = [UIColor colorWithRed:249.0f / 255.0f green:247.0f / 255.0f blue:247.0f / 255.0f alpha:1.0f];
         [self.bottomBtn setTitle:@"Share Your QR Code" forState:UIControlStateNormal];
         [self.bottomBtn setTitleColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
-        [self.bottomBtn addTarget:self action:@selector(shareLineWithImage) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        [self.bottomBtn addTarget:self action:@selector(shareYourQRCode) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f].CGColor];
     }
 }
 
-- (void)shareLineWithImage {
+- (void)shareYourQRCode {
+    [self shareLineWithImage:self.qrcodeImage];
+}
 
-    UIPasteboard *pasteboard = [UIPasteboard generatePasteLineBoard];
-    [pasteboard setData:UIImageJPEGRepresentation(self.qrcodeImage, 1.0f) forPasteboardType:@"public.jpeg"];
+- (void)selectFromPhotos {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:NULL];
+}
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name]]];
+- (void)shareLineWithImage:(UIImage *)image {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://"]]) {
+        UIPasteboard *pasteboard = [UIPasteboard generatePasteLineBoard];
+        [pasteboard setData:UIImageJPEGRepresentation(image, 1.0f) forPasteboardType:@"public.jpeg"];
+
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name]]];
+    } else {
+        NSURL *itunesURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id443904275"];
+        [[UIApplication sharedApplication] openURL:itunesURL];
+    }
 }
 
 #pragma mark - ZXCaptureDelegate Methods
@@ -224,6 +241,14 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [self.capture start];
     self.alreadyShowAlertView = NO;
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *img = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [self shareLineWithImage:img];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
