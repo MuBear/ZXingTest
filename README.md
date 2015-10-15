@@ -1,5 +1,6 @@
-ZXingTest
-========
+# ZXingTest
+
+利用ZXing來產生QR Code和掃描QR Code的測試專案
 
 ## install cocoaPods ZXingObjC
 
