@@ -8,6 +8,27 @@
 
 #import "ViewController.h"
 
+@interface UIPasteboard(Line)
+
++ (UIPasteboard *)generatePasteLineBoard;
+
+@end
+
+@implementation UIPasteboard(Line)
+
++ (UIPasteboard *)generatePasteLineBoard
+{
+    UIPasteboard *pasteboard;
+    if ([[[UIDevice currentDevice] systemVersion] integerValue] < 7.0) {
+        pasteboard = [UIPasteboard pasteboardWithName:@"jp.naver.linecamera.pasteboard" create:YES];
+    } else {
+        pasteboard = [UIPasteboard generalPasteboard];
+    }
+    return pasteboard;
+}
+
+@end
+
 @interface ViewController ()<UIAlertViewDelegate>
 
 @property (nonatomic, strong) ZXCapture *capture;
@@ -19,6 +40,7 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControler;
 @property (nonatomic, weak) IBOutlet UIButton *bottomBtn;
 @property (nonatomic, strong) UIImageView *codeImageView;
+@property (nonatomic, strong) UIImage *qrcodeImage;
 
 @end
 
@@ -45,7 +67,8 @@
                                   height:self.view.bounds.size.width
                                    error:nil];
     ZXImage *image = [ZXImage imageWithMatrix:result];
-    self.codeImageView.image = [UIImage imageWithCGImage:image.cgimage];
+    self.qrcodeImage = [UIImage imageWithCGImage:image.cgimage];
+    self.codeImageView.image = self.qrcodeImage;
 
     [self.view.layer addSublayer:self.capture.layer];
     [self.view bringSubviewToFront:self.topContainerView];
@@ -149,6 +172,7 @@
         self.bottomBtn.backgroundColor = [UIColor blackColor];
         [self.bottomBtn setTitle:@"Select from Photos" forState:UIControlStateNormal];
         [self.bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [[self.bottomBtn layer] setBorderColor:[UIColor whiteColor].CGColor];
     } else {
         [self.capture stop];
@@ -163,8 +187,17 @@
         self.bottomBtn.backgroundColor = [UIColor colorWithRed:249.0f / 255.0f green:247.0f / 255.0f blue:247.0f / 255.0f alpha:1.0f];
         [self.bottomBtn setTitle:@"Share Your QR Code" forState:UIControlStateNormal];
         [self.bottomBtn setTitleColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+        [self.bottomBtn addTarget:self action:@selector(shareLineWithImage) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f].CGColor];
     }
+}
+
+- (void)shareLineWithImage {
+
+    UIPasteboard *pasteboard = [UIPasteboard generatePasteLineBoard];
+    [pasteboard setData:UIImageJPEGRepresentation(self.qrcodeImage, 1.0f) forPasteboardType:@"public.jpeg"];
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name]]];
 }
 
 #pragma mark - ZXCaptureDelegate Methods
@@ -189,10 +222,8 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self.capture start];
-        self.alreadyShowAlertView = NO;
-    });
+    [self.capture start];
+    self.alreadyShowAlertView = NO;
 }
 
 @end
