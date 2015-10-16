@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1823F75D1BD0A9A60005A629 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F75C1BD0A9A60005A629 /* logo.png */; settings = {ASSET_TAGS = (); }; };
+		1823F7601BD0FDC80005A629 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823F75F1BD0FDC80005A629 /* LXActivity.m */; settings = {ASSET_TAGS = (); }; };
 		186CC2EA1BCDFD4B00C7402F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2E91BCDFD4B00C7402F /* main.m */; };
 		186CC2ED1BCDFD4B00C7402F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EC1BCDFD4B00C7402F /* AppDelegate.m */; };
 		186CC2F01BCDFD4B00C7402F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EF1BCDFD4B00C7402F /* ViewController.m */; };
@@ -20,6 +21,8 @@
 /* Begin PBXFileReference section */
 		02B47DF36F42B574EFD9CC69 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1823F75C1BD0A9A60005A629 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		1823F75E1BD0FDC80005A629 /* LXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXActivity.h; sourceTree = "<group>"; };
+		1823F75F1BD0FDC80005A629 /* LXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActivity.m; sourceTree = "<group>"; };
 		186CC2E51BCDFD4B00C7402F /* ZXingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		186CC2E91BCDFD4B00C7402F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		186CC2EB1BCDFD4B00C7402F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 				186CC2EC1BCDFD4B00C7402F /* AppDelegate.m */,
 				186CC2EE1BCDFD4B00C7402F /* ViewController.h */,
 				186CC2EF1BCDFD4B00C7402F /* ViewController.m */,
+				1823F75E1BD0FDC80005A629 /* LXActivity.h */,
+				1823F75F1BD0FDC80005A629 /* LXActivity.m */,
 				186CC2F11BCDFD4B00C7402F /* Main.storyboard */,
 				186CC2F41BCDFD4B00C7402F /* Assets.xcassets */,
 				186CC2F61BCDFD4B00C7402F /* LaunchScreen.storyboard */,
@@ -212,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1823F7601BD0FDC80005A629 /* LXActivity.m in Sources */,
 				186CC2F01BCDFD4B00C7402F /* ViewController.m in Sources */,
 				186CC2ED1BCDFD4B00C7402F /* AppDelegate.m in Sources */,
 				186CC2EA1BCDFD4B00C7402F /* main.m in Sources */,
