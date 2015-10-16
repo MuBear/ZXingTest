@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "LXActivity.h"
+#import <MessageUI/MessageUI.h>
+#import "Social/Social.h"
 
 @interface UIPasteboard(Line)
 
@@ -30,7 +33,7 @@
 @end
 
 @interface ViewController ()
-<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LXActivityDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) ZXCapture *capture;
 @property (nonatomic, weak) IBOutlet UIView *topContainerView;
@@ -227,7 +230,8 @@
 }
 
 - (void)shareYourQRCode {
-    [self shareLineWithImage:self.codeImageView.image];
+    LXActivity *lxActivity = [[LXActivity alloc] initWithTitle:@"Share this QRcode" delegate:self cancelButtonTitle:@"Cancel" ShareButtonTitles:@[@"Mail", @"Facebook", @"Line", @"Whatsapp"] withShareButtonImagesName:@[@"mailshare_icon", @"fbshare_icon", @"lineshare_icon", @"whatsappshare_icon"]];
+    [lxActivity showInView:self.view];
 }
 
 - (void)selectFromPhotos {
@@ -280,6 +284,94 @@
     UIImage *img = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self shareLineWithImage:img];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - LXActivityDelegate
+
+- (void)didClickOnImageIndex:(NSInteger *)imageIndex {
+    NSString *emailTitle = @"My QR Code";
+    NSString *messageBody = @"Hello!  This is my QR Code.  You can scan this with the scan QRCode App";
+    NSString *shareUrl = @"https://tw.yahoo.com";
+
+    if ((int)imageIndex == 0) {
+        // Present mail view controller on screen
+        if ([MFMailComposeViewController canSendMail]) {
+            // Email Subject
+            messageBody = [messageBody stringByAppendingString:shareUrl];
+            MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+            mc.mailComposeDelegate = self;
+            [mc setSubject:emailTitle];
+            [mc setMessageBody:messageBody isHTML:NO];
+            [self presentViewController:mc animated:YES completion:NULL];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Mail Accounts" message:@"Please go to \"Settings\" > \"Mail, Contacts, Calendars \" > \"Add Account\" to set your email account" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    } else if ((int)imageIndex == 1) {
+        SLComposeViewController *fbController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+            SLComposeViewControllerCompletionHandler __block completionHandler = ^(SLComposeViewControllerResult result){
+                [fbController dismissViewControllerAnimated:YES completion:nil];
+
+                switch (result) {
+                    case SLComposeViewControllerResultCancelled:
+                    default: {
+                        NSLog(@"Cancelled.....");
+                    }
+                        break;
+                    case SLComposeViewControllerResultDone: {
+                        NSLog(@"Posted....");
+                    }
+                        break;
+                }};
+            [fbController setInitialText:messageBody];
+            [fbController addURL:[NSURL URLWithString:shareUrl]];
+            [fbController setCompletionHandler:completionHandler];
+            [self presentViewController:fbController animated:YES completion:nil];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No FaceBook Accounts" message:@"Please go to \"Settings\" > \"Facebook\" to set your Facebook account" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    } else if ((int)imageIndex == 2) {
+        messageBody = [messageBody stringByAppendingString:shareUrl];
+        NSString *lineString = [NSString stringWithFormat:@"http://line.me/R/msg/text/?%@", messageBody];
+        lineString = [lineString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *appURL = [NSURL URLWithString:lineString];
+
+        if ([[UIApplication sharedApplication] canOpenURL:appURL]) {
+            [[UIApplication sharedApplication] openURL:appURL];
+        } else {
+            NSURL *itunesURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id443904275"];
+            [[UIApplication sharedApplication] openURL:itunesURL];
+        }
+    } else if ((int)imageIndex == 3) {
+        messageBody = [messageBody stringByAppendingString:shareUrl];
+        NSString *whatsappString = [NSString stringWithFormat:@"whatsapp://send?text=%@", messageBody];
+        whatsappString = [whatsappString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *appURL = [NSURL URLWithString:whatsappString];
+
+        if ([[UIApplication sharedApplication] canOpenURL:appURL]) {
+            [[UIApplication sharedApplication] openURL:appURL];
+        } else {
+            NSURL *itunesURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id310633997"];
+            [[UIApplication sharedApplication] openURL:itunesURL];
+        }
+    }
+}
+
+#pragma mark - Orientation
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientation)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 @end

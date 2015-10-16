@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		1823F75D1BD0A9A60005A629 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F75C1BD0A9A60005A629 /* logo.png */; settings = {ASSET_TAGS = (); }; };
 		1823F7601BD0FDC80005A629 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823F75F1BD0FDC80005A629 /* LXActivity.m */; settings = {ASSET_TAGS = (); }; };
+		1823F7621BD1016E0005A629 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1823F7611BD1016E0005A629 /* Social.framework */; };
+		1823F76B1BD1036D0005A629 /* whatsappshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7631BD1036D0005A629 /* whatsappshare_icon.png */; settings = {ASSET_TAGS = (); }; };
+		1823F76C1BD1036D0005A629 /* whatsappshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1823F76D1BD1036D0005A629 /* lineshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7651BD1036D0005A629 /* lineshare_icon.png */; settings = {ASSET_TAGS = (); }; };
+		1823F76E1BD1036D0005A629 /* lineshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7661BD1036D0005A629 /* lineshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1823F76F1BD1036D0005A629 /* fbshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7671BD1036D0005A629 /* fbshare_icon.png */; settings = {ASSET_TAGS = (); }; };
+		1823F7701BD1036D0005A629 /* fbshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7681BD1036D0005A629 /* fbshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1823F7711BD1036D0005A629 /* mailshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7691BD1036D0005A629 /* mailshare_icon.png */; settings = {ASSET_TAGS = (); }; };
+		1823F7721BD1036D0005A629 /* mailshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F76A1BD1036D0005A629 /* mailshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
 		186CC2EA1BCDFD4B00C7402F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2E91BCDFD4B00C7402F /* main.m */; };
 		186CC2ED1BCDFD4B00C7402F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EC1BCDFD4B00C7402F /* AppDelegate.m */; };
 		186CC2F01BCDFD4B00C7402F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EF1BCDFD4B00C7402F /* ViewController.m */; };
@@ -23,6 +32,15 @@
 		1823F75C1BD0A9A60005A629 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		1823F75E1BD0FDC80005A629 /* LXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXActivity.h; sourceTree = "<group>"; };
 		1823F75F1BD0FDC80005A629 /* LXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActivity.m; sourceTree = "<group>"; };
+		1823F7611BD1016E0005A629 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		1823F7631BD1036D0005A629 /* whatsappshare_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsappshare_icon.png; sourceTree = "<group>"; };
+		1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whatsappshare_icon@2x.png"; sourceTree = "<group>"; };
+		1823F7651BD1036D0005A629 /* lineshare_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lineshare_icon.png; sourceTree = "<group>"; };
+		1823F7661BD1036D0005A629 /* lineshare_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineshare_icon@2x.png"; sourceTree = "<group>"; };
+		1823F7671BD1036D0005A629 /* fbshare_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbshare_icon.png; sourceTree = "<group>"; };
+		1823F7681BD1036D0005A629 /* fbshare_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fbshare_icon@2x.png"; sourceTree = "<group>"; };
+		1823F7691BD1036D0005A629 /* mailshare_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailshare_icon.png; sourceTree = "<group>"; };
+		1823F76A1BD1036D0005A629 /* mailshare_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mailshare_icon@2x.png"; sourceTree = "<group>"; };
 		186CC2E51BCDFD4B00C7402F /* ZXingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		186CC2E91BCDFD4B00C7402F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		186CC2EB1BCDFD4B00C7402F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1823F7621BD1016E0005A629 /* Social.framework in Frameworks */,
 				5334E6CEF0DECE937EF52D33 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +107,14 @@
 		186CC2E81BCDFD4B00C7402F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1823F7631BD1036D0005A629 /* whatsappshare_icon.png */,
+				1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */,
+				1823F7651BD1036D0005A629 /* lineshare_icon.png */,
+				1823F7661BD1036D0005A629 /* lineshare_icon@2x.png */,
+				1823F7671BD1036D0005A629 /* fbshare_icon.png */,
+				1823F7681BD1036D0005A629 /* fbshare_icon@2x.png */,
+				1823F7691BD1036D0005A629 /* mailshare_icon.png */,
+				1823F76A1BD1036D0005A629 /* mailshare_icon@2x.png */,
 				1823F75C1BD0A9A60005A629 /* logo.png */,
 				186CC2E91BCDFD4B00C7402F /* main.m */,
 			);
@@ -97,6 +124,7 @@
 		CBA309C4E977AB56A9D8BB4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1823F7611BD1016E0005A629 /* Social.framework */,
 				AF9F1C3D772A92A7CA9D8F0E /* libPods.a */,
 			);
 			name = Frameworks;
@@ -170,10 +198,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1823F7711BD1036D0005A629 /* mailshare_icon.png in Resources */,
+				1823F76B1BD1036D0005A629 /* whatsappshare_icon.png in Resources */,
 				186CC2F81BCDFD4B00C7402F /* LaunchScreen.storyboard in Resources */,
+				1823F76D1BD1036D0005A629 /* lineshare_icon.png in Resources */,
+				1823F7721BD1036D0005A629 /* mailshare_icon@2x.png in Resources */,
 				1823F75D1BD0A9A60005A629 /* logo.png in Resources */,
+				1823F76F1BD1036D0005A629 /* fbshare_icon.png in Resources */,
+				1823F76C1BD1036D0005A629 /* whatsappshare_icon@2x.png in Resources */,
+				1823F76E1BD1036D0005A629 /* lineshare_icon@2x.png in Resources */,
 				186CC2F51BCDFD4B00C7402F /* Assets.xcassets in Resources */,
 				186CC2F31BCDFD4B00C7402F /* Main.storyboard in Resources */,
+				1823F7701BD1036D0005A629 /* fbshare_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
