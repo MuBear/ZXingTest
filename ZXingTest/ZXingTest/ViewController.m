@@ -67,8 +67,27 @@
                                    width:self.view.bounds.size.width
                                   height:self.view.bounds.size.width
                                    error:nil];
+
     ZXImage *image = [ZXImage imageWithMatrix:result];
-    self.qrcodeImage = [UIImage imageWithCGImage:image.cgimage];
+
+    //Combind image
+    UIImage *bottomImage = [UIImage imageWithCGImage:image.cgimage]; //background image
+    UIImage *logoImage    = [UIImage imageNamed:@"logo"]; //foreground image
+
+    CGSize newSize = CGSizeMake(280.0f, 280.0f);
+    UIGraphicsBeginImageContext( newSize );
+
+    // Use existing opacity as is
+    [bottomImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+
+    // Apply supplied opacity if applicable
+    [logoImage drawInRect:CGRectMake(115.0f, 108.0f, 48.0f, 60.0f) blendMode:kCGBlendModeNormal alpha:0.8];
+
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+
+    self.qrcodeImage = newImage;
     self.codeImageView.image = self.qrcodeImage;
 
     [self.view.layer addSublayer:self.capture.layer];
