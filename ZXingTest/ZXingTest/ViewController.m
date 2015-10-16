@@ -216,7 +216,7 @@
     [bottomImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
 
     // Apply supplied opacity if applicable
-    [logoImage drawInRect:CGRectMake(115.0f, 108.0f, 48.0f, 60.0f) blendMode:kCGBlendModeNormal alpha:0.8];
+    [logoImage drawInRect:CGRectMake(self.view.bounds.size.width / 2 - 48.0f, self.scanAreaView.bounds.origin.y + (self.scanAreaView.bounds.size.height / 2 - 30.0f) , 48.0f, 60.0f) blendMode:kCGBlendModeNormal alpha:0.8];
 
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 
