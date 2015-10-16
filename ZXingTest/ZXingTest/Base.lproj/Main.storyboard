@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -51,9 +50,24 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBO-NU-4JY" userLabel="Scaner area View">
                                 <rect key="frame" x="0.0" y="114" width="600" height="280"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJD-Zj-elq">
+                                        <rect key="frame" x="255" y="0.0" width="90" height="32"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="C72-hk-RVc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" title="Add Logo">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="eJD-Zj-elq" firstAttribute="top" secondItem="PBO-NU-4JY" secondAttribute="top" id="TNk-jR-Pz1"/>
                                     <constraint firstAttribute="height" constant="280" id="aPB-XT-XDl"/>
+                                    <constraint firstItem="eJD-Zj-elq" firstAttribute="centerX" secondItem="PBO-NU-4JY" secondAttribute="centerX" id="yXS-bP-cEX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZU-Fl-HAs" userLabel="bottom view">
@@ -86,36 +100,19 @@
                             <constraint firstAttribute="trailing" secondItem="pZU-Fl-HAs" secondAttribute="trailing" id="AL7-L3-qIq"/>
                             <constraint firstItem="Tyv-OO-J5B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HWQ-QG-iiw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pZU-Fl-HAs" secondAttribute="bottom" id="KXi-NV-kfE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pZU-Fl-HAs" secondAttribute="trailing" id="KbT-UO-f87"/>
-                            <constraint firstItem="7Vy-Jl-HKF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="L6F-96-nas"/>
-                            <constraint firstItem="7Vy-Jl-HKF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="QYX-YU-nEA"/>
                             <constraint firstAttribute="trailing" secondItem="7Vy-Jl-HKF" secondAttribute="trailing" id="TfL-bN-fe5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7Vy-Jl-HKF" secondAttribute="trailing" id="VPY-RZ-vge"/>
-                            <constraint firstItem="pZU-Fl-HAs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bbs-Ve-4e1"/>
-                            <constraint firstItem="Tyv-OO-J5B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="c3P-5b-6ZI"/>
                             <constraint firstItem="PBO-NU-4JY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="clF-uu-ucd"/>
                             <constraint firstItem="7Vy-Jl-HKF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hFy-Mg-tDs"/>
                             <constraint firstItem="pZU-Fl-HAs" firstAttribute="top" secondItem="PBO-NU-4JY" secondAttribute="bottom" id="j3d-Pj-MYZ"/>
                             <constraint firstAttribute="trailing" secondItem="Tyv-OO-J5B" secondAttribute="trailing" id="kd3-yK-99R"/>
                             <constraint firstItem="7Vy-Jl-HKF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="opZ-E7-dIz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tyv-OO-J5B" secondAttribute="trailing" id="p0d-dY-r4Q"/>
                             <constraint firstAttribute="trailing" secondItem="PBO-NU-4JY" secondAttribute="trailing" id="tyu-rd-iJq"/>
                             <constraint firstItem="pZU-Fl-HAs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="w4y-cm-iof"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="L6F-96-nas"/>
-                                <exclude reference="QYX-YU-nEA"/>
-                                <exclude reference="VPY-RZ-vge"/>
-                                <exclude reference="c3P-5b-6ZI"/>
-                                <exclude reference="p0d-dY-r4Q"/>
-                                <exclude reference="KbT-UO-f87"/>
-                                <exclude reference="bbs-Ve-4e1"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
+                        <outlet property="addLogoBtn" destination="eJD-Zj-elq" id="Klv-D2-scd"/>
                         <outlet property="botomContainerView" destination="pZU-Fl-HAs" id="CyK-fL-Xia"/>
                         <outlet property="bottomBtn" destination="XVf-0C-CKi" id="2vh-FA-8Ol"/>
                         <outlet property="scanAreaView" destination="PBO-NU-4JY" id="h4F-by-bfy"/>

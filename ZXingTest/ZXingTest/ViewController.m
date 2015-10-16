@@ -41,7 +41,8 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControler;
 @property (nonatomic, weak) IBOutlet UIButton *bottomBtn;
 @property (nonatomic, strong) UIImageView *codeImageView;
-@property (nonatomic, strong) UIImage *qrcodeImage;
+@property (nonatomic, strong) ZXImage *zxImage;
+@property (nonatomic, weak) IBOutlet UIButton *addLogoBtn;
 
 @end
 
@@ -60,7 +61,8 @@
     self.capture.rotation = 90.0f;
     self.capture.layer.frame = CGRectMake(0.0f, 20.0f, self.view.bounds.size.width, self.view.bounds.size.height - 20.0f);
 
-    self.codeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, 280.0f, 280.0f)];
+
+    self.codeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 35, 280.0f, 280.0f)];
     ZXMultiFormatWriter *writer = [[ZXMultiFormatWriter alloc] init];
     ZXBitMatrix *result = [writer encode:@"7533967"
                                   format:kBarcodeFormatQRCode
@@ -68,27 +70,8 @@
                                   height:self.view.bounds.size.width
                                    error:nil];
 
-    ZXImage *image = [ZXImage imageWithMatrix:result];
-
-    //Combind image
-    UIImage *bottomImage = [UIImage imageWithCGImage:image.cgimage]; //background image
-    UIImage *logoImage    = [UIImage imageNamed:@"logo"]; //foreground image
-
-    CGSize newSize = CGSizeMake(280.0f, 280.0f);
-    UIGraphicsBeginImageContext( newSize );
-
-    // Use existing opacity as is
-    [bottomImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-
-    // Apply supplied opacity if applicable
-    [logoImage drawInRect:CGRectMake(115.0f, 108.0f, 48.0f, 60.0f) blendMode:kCGBlendModeNormal alpha:0.8];
-
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-
-    self.qrcodeImage = newImage;
-    self.codeImageView.image = self.qrcodeImage;
+    self.zxImage = [ZXImage imageWithMatrix:result];
+    self.codeImageView.image = [UIImage imageWithCGImage:self.zxImage.cgimage];
 
     [self.view.layer addSublayer:self.capture.layer];
     [self.view bringSubviewToFront:self.topContainerView];
@@ -100,6 +83,9 @@
     [self.segmentedControler addTarget:self action:@selector(chooseWhichSegment:) forControlEvents:UIControlEventValueChanged];
     [[self.bottomBtn layer] setBorderWidth:1.0f];
     [self chooseWhichSegment:0];
+
+    [self.addLogoBtn addTarget:self action:@selector(addLogoTOQrCode:) forControlEvents:UIControlEventTouchUpInside];
+    self.addLogoBtn.layer.borderWidth = 1.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -108,7 +94,7 @@
     self.capture.delegate = self;
     self.capture.layer.frame = CGRectMake(0.0f, 20.0f, self.view.bounds.size.width, self.view.bounds.size.height - 20.0f);
 
-    self.capture.scanRect = CGRectMake(0.0f, 100.0f, self.view.bounds.size.width, self.view.bounds.size.height - 100.0f);
+    self.capture.scanRect = CGRectMake(0.0f, 20.0f, self.view.bounds.size.width, self.view.bounds.size.height - 20.0f);
     self.alreadyShowAlertView = NO;
 }
 
@@ -195,6 +181,7 @@
         [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.bottomBtn addTarget:self action:@selector(selectFromPhotos) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor whiteColor].CGColor];
+        self.addLogoBtn.hidden = YES;
     } else {
         [self.capture stop];
 
@@ -211,11 +198,36 @@
         [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.bottomBtn addTarget:self action:@selector(shareYourQRCode) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f].CGColor];
+        self.addLogoBtn.hidden = NO;
+        self.codeImageView.image = [UIImage imageWithCGImage:self.zxImage.cgimage];
+        [self.codeImageView setNeedsDisplay];
     }
 }
 
+- (IBAction)addLogoTOQrCode:(id)sender {
+    //Combind image
+    UIImage *bottomImage = [UIImage imageWithCGImage:self.zxImage.cgimage]; //background image
+    UIImage *logoImage    = [UIImage imageNamed:@"logo"]; //foreground image
+
+    CGSize newSize = CGSizeMake(280.0f, 280.0f);
+    UIGraphicsBeginImageContext( newSize );
+
+    // Use existing opacity as is
+    [bottomImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+
+    // Apply supplied opacity if applicable
+    [logoImage drawInRect:CGRectMake(115.0f, 108.0f, 48.0f, 60.0f) blendMode:kCGBlendModeNormal alpha:0.8];
+
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+
+    self.codeImageView.image = newImage;
+    [self.codeImageView setNeedsDisplay];
+}
+
 - (void)shareYourQRCode {
-    [self shareLineWithImage:self.qrcodeImage];
+    [self shareLineWithImage:self.codeImageView.image];
 }
 
 - (void)selectFromPhotos {
