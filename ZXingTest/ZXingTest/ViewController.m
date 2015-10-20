@@ -33,7 +33,7 @@
 @end
 
 @interface ViewController ()
-<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LXActivityDelegate, MFMailComposeViewControllerDelegate>
+<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LXActivityDelegate, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) ZXCapture *capture;
 @property (nonatomic, weak) IBOutlet UIView *topContainerView;
@@ -46,6 +46,7 @@
 @property (nonatomic, strong) UIImageView *codeImageView;
 @property (nonatomic, strong) ZXImage *zxImage;
 @property (nonatomic, weak) IBOutlet UIButton *addLogoBtn;
+@property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 
 @end
 
@@ -252,6 +253,72 @@
     }
 }
 
+- (UIImage *)drawText:(NSString *)text
+             inImage:(UIImage *)image
+             atPoint:(CGPoint)point {
+
+    NSMutableAttributedString *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    textStyle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", text]];
+
+    // text color
+    [textStyle addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, textStyle.length)];
+
+    // text font
+    [textStyle addAttribute:NSFontAttributeName  value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(0, textStyle.length)];
+
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+
+    /// Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    [textStyle addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, textStyle.length)];
+
+    CGSize textSize = [self findHeightForText:text havingWidth:image.size.width - (point.x * 2) andFont:[UIFont systemFontOfSize:20.0]];
+
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake((image.size.width - (image.size.height - textSize.height)) / 2 ,textSize.height , image.size.height - textSize.height, image.size.height - textSize.height)];
+    CGRect rect = CGRectMake(point.x, point.y, image.size.width - (point.x * 2), image.size.height);
+
+    [[UIColor whiteColor] set];
+
+    [textStyle drawInRect:CGRectIntegral(rect)];
+
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (CGSize)findHeightForText:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font {
+    CGSize size = CGSizeZero;
+    if (text) {
+        //iOS 7
+        CGRect frame = [text boundingRectWithSize:CGSizeMake(widthValue, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:font } context:nil];
+        size = CGSizeMake(frame.size.width, frame.size.height + 1);
+    }
+    return size;
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 #pragma mark - ZXCaptureDelegate Methods
 
 - (void)captureResult:(ZXCapture *)capture result:(ZXResult *)result {
@@ -293,14 +360,19 @@
     NSString *messageBody = @"Hello!  This is my QR Code.  You can scan this with the scan QRCode App";
     NSString *shareUrl = @"https://tw.yahoo.com";
 
+    UIImage *textMixQrcodeImage = [self drawText:messageBody inImage:[UIImage imageWithCGImage:self.zxImage.cgimage] atPoint:CGPointMake(16.0f, 0.0f)];
+
     if ((int)imageIndex == 0) {
         // Present mail view controller on screen
         if ([MFMailComposeViewController canSendMail]) {
             // Email Subject
-            messageBody = [messageBody stringByAppendingString:shareUrl];
+            messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"\n%@", shareUrl]];
             MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
             mc.mailComposeDelegate = self;
             [mc setSubject:emailTitle];
+
+            NSData *data = UIImagePNGRepresentation(self.codeImageView.image);
+            [mc addAttachmentData:data mimeType:@"image/png" fileName:@"qrcode.png"];
             [mc setMessageBody:messageBody isHTML:NO];
             [self presentViewController:mc animated:YES completion:NULL];
         } else {
@@ -325,8 +397,8 @@
                     }
                         break;
                 }};
-            [fbController setInitialText:messageBody];
-            [fbController addURL:[NSURL URLWithString:shareUrl]];
+
+            [fbController addImage:textMixQrcodeImage];
             [fbController setCompletionHandler:completionHandler];
             [self presentViewController:fbController animated:YES completion:nil];
         } else {
@@ -334,25 +406,16 @@
             [alert show];
         }
     } else if ((int)imageIndex == 2) {
-        messageBody = [messageBody stringByAppendingString:shareUrl];
-        NSString *lineString = [NSString stringWithFormat:@"http://line.me/R/msg/text/?%@", messageBody];
-        lineString = [lineString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *appURL = [NSURL URLWithString:lineString];
-
-        if ([[UIApplication sharedApplication] canOpenURL:appURL]) {
-            [[UIApplication sharedApplication] openURL:appURL];
-        } else {
-            NSURL *itunesURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id443904275"];
-            [[UIApplication sharedApplication] openURL:itunesURL];
-        }
+        [self shareLineWithImage:textMixQrcodeImage];
     } else if ((int)imageIndex == 3) {
-        messageBody = [messageBody stringByAppendingString:shareUrl];
-        NSString *whatsappString = [NSString stringWithFormat:@"whatsapp://send?text=%@", messageBody];
-        whatsappString = [whatsappString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *appURL = [NSURL URLWithString:whatsappString];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"whatsapp://app"]]) {
 
-        if ([[UIApplication sharedApplication] canOpenURL:appURL]) {
-            [[UIApplication sharedApplication] openURL:appURL];
+            NSString *savePath  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/whatsAppTmp.wai"];
+            [UIImageJPEGRepresentation(textMixQrcodeImage, 1.0) writeToFile:savePath atomically:YES];
+            self.documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:savePath]];
+            self.documentInteractionController.UTI = @"net.whatsapp.image";
+            self.documentInteractionController.delegate = self;
+            [self.documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated: YES];
         } else {
             NSURL *itunesURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id310633997"];
             [[UIApplication sharedApplication] openURL:itunesURL];
@@ -366,7 +429,7 @@
     return YES;
 }
 
-- (UIInterfaceOrientation)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 
