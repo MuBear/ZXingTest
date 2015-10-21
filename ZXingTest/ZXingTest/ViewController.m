@@ -47,6 +47,11 @@
 @property (nonatomic, strong) ZXImage *zxImage;
 @property (nonatomic, weak) IBOutlet UIButton *addLogoBtn;
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
+@property (nonatomic, weak) IBOutlet UIView *topScannerView;
+@property (nonatomic, weak) IBOutlet UIImageView *scannerImageVIew;
+@property (nonatomic, weak) IBOutlet UIView *leadingScannerVIew;
+@property (nonatomic, weak) IBOutlet UIView *trailingScannerVIew;
+@property (nonatomic, weak) IBOutlet UIView *bottomScannerView;
 
 @end
 
@@ -174,17 +179,22 @@
         [self.codeImageView removeFromSuperview];
         [self.capture start];
 
-        self.titleLabel.backgroundColor = [UIColor blackColor];
+        self.titleLabel.backgroundColor = [UIColor colorWithRed:0.0f / 255.0f green:0.0f / 255.0f blue:0.0f / 255.0f alpha:0.8f];
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.text = @"Scan their QR code to add them as partners";
         self.scanAreaView.backgroundColor = [UIColor clearColor];
-        self.botomContainerView.backgroundColor = [UIColor blackColor];
-        self.bottomBtn.backgroundColor = [UIColor blackColor];
+        self.botomContainerView.backgroundColor = [UIColor colorWithRed:0.0f / 255.0f green:0.0f / 255.0f blue:0.0f / 255.0f alpha:0.8f];
+        self.bottomBtn.backgroundColor = [UIColor colorWithRed:0.0f / 255.0f green:0.0f / 255.0f blue:0.0f / 255.0f alpha:0.8f];
         [self.bottomBtn setTitle:@"Select from Photos" forState:UIControlStateNormal];
         [self.bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.bottomBtn addTarget:self action:@selector(selectFromPhotos) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor whiteColor].CGColor];
+        self.scannerImageVIew.hidden = NO;
+        self.topScannerView.hidden = NO;
+        self.leadingScannerVIew.hidden = NO;
+        self.trailingScannerVIew.hidden = NO;
+        self.bottomScannerView.hidden = NO;
         self.addLogoBtn.hidden = YES;
     } else {
         [self.capture stop];
@@ -202,6 +212,11 @@
         [self.bottomBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.bottomBtn addTarget:self action:@selector(shareYourQRCode) forControlEvents:UIControlEventTouchUpInside];
         [[self.bottomBtn layer] setBorderColor:[UIColor colorWithRed:68.0f / 255.0f green:115.0f / 255.0f blue:113.0f / 255.0f alpha:1.0f].CGColor];
+        self.scannerImageVIew.hidden = YES;
+        self.topScannerView.hidden = YES;
+        self.leadingScannerVIew.hidden = YES;
+        self.trailingScannerVIew.hidden = YES;
+        self.bottomScannerView.hidden = YES;
         self.addLogoBtn.hidden = NO;
         self.codeImageView.image = [UIImage imageWithCGImage:self.zxImage.cgimage];
         [self.codeImageView setNeedsDisplay];
