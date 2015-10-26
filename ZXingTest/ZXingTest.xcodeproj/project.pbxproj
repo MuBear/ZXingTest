@@ -7,23 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1823F75D1BD0A9A60005A629 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F75C1BD0A9A60005A629 /* logo.png */; settings = {ASSET_TAGS = (); }; };
-		1823F7601BD0FDC80005A629 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823F75F1BD0FDC80005A629 /* LXActivity.m */; settings = {ASSET_TAGS = (); }; };
+		1823F75D1BD0A9A60005A629 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F75C1BD0A9A60005A629 /* logo.png */; };
+		1823F7601BD0FDC80005A629 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823F75F1BD0FDC80005A629 /* LXActivity.m */; };
 		1823F7621BD1016E0005A629 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1823F7611BD1016E0005A629 /* Social.framework */; };
-		1823F76B1BD1036D0005A629 /* whatsappshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7631BD1036D0005A629 /* whatsappshare_icon.png */; settings = {ASSET_TAGS = (); }; };
-		1823F76C1BD1036D0005A629 /* whatsappshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
-		1823F76D1BD1036D0005A629 /* lineshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7651BD1036D0005A629 /* lineshare_icon.png */; settings = {ASSET_TAGS = (); }; };
-		1823F76E1BD1036D0005A629 /* lineshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7661BD1036D0005A629 /* lineshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
-		1823F76F1BD1036D0005A629 /* fbshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7671BD1036D0005A629 /* fbshare_icon.png */; settings = {ASSET_TAGS = (); }; };
-		1823F7701BD1036D0005A629 /* fbshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7681BD1036D0005A629 /* fbshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
-		1823F7711BD1036D0005A629 /* mailshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7691BD1036D0005A629 /* mailshare_icon.png */; settings = {ASSET_TAGS = (); }; };
-		1823F7721BD1036D0005A629 /* mailshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F76A1BD1036D0005A629 /* mailshare_icon@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1823F76B1BD1036D0005A629 /* whatsappshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7631BD1036D0005A629 /* whatsappshare_icon.png */; };
+		1823F76C1BD1036D0005A629 /* whatsappshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */; };
+		1823F76D1BD1036D0005A629 /* lineshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7651BD1036D0005A629 /* lineshare_icon.png */; };
+		1823F76E1BD1036D0005A629 /* lineshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7661BD1036D0005A629 /* lineshare_icon@2x.png */; };
+		1823F76F1BD1036D0005A629 /* fbshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7671BD1036D0005A629 /* fbshare_icon.png */; };
+		1823F7701BD1036D0005A629 /* fbshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7681BD1036D0005A629 /* fbshare_icon@2x.png */; };
+		1823F7711BD1036D0005A629 /* mailshare_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F7691BD1036D0005A629 /* mailshare_icon.png */; };
+		1823F7721BD1036D0005A629 /* mailshare_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1823F76A1BD1036D0005A629 /* mailshare_icon@2x.png */; };
 		186CC2EA1BCDFD4B00C7402F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2E91BCDFD4B00C7402F /* main.m */; };
 		186CC2ED1BCDFD4B00C7402F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EC1BCDFD4B00C7402F /* AppDelegate.m */; };
 		186CC2F01BCDFD4B00C7402F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CC2EF1BCDFD4B00C7402F /* ViewController.m */; };
 		186CC2F31BCDFD4B00C7402F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186CC2F11BCDFD4B00C7402F /* Main.storyboard */; };
 		186CC2F51BCDFD4B00C7402F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186CC2F41BCDFD4B00C7402F /* Assets.xcassets */; };
 		186CC2F81BCDFD4B00C7402F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186CC2F61BCDFD4B00C7402F /* LaunchScreen.storyboard */; };
+		187A95CC1BDE3B7300286176 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187A95CB1BDE3B7300286176 /* StyleSettings.plist */; };
 		5334E6CEF0DECE937EF52D33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9F1C3D772A92A7CA9D8F0E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		186CC2F41BCDFD4B00C7402F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		186CC2F71BCDFD4B00C7402F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		186CC2F91BCDFD4B00C7402F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		187A95CB1BDE3B7300286176 /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = "<group>"; };
 		55F4850B635D604B91EC19D9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AF9F1C3D772A92A7CA9D8F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -107,6 +109,7 @@
 		186CC2E81BCDFD4B00C7402F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				187A95CB1BDE3B7300286176 /* StyleSettings.plist */,
 				1823F7631BD1036D0005A629 /* whatsappshare_icon.png */,
 				1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */,
 				1823F7651BD1036D0005A629 /* lineshare_icon.png */,
@@ -151,6 +154,7 @@
 				186CC2E21BCDFD4B00C7402F /* Frameworks */,
 				186CC2E31BCDFD4B00C7402F /* Resources */,
 				E5016D1D62561DD5A8EE3CF1 /* Copy Pods Resources */,
+				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 			);
 			buildRules = (
 			);
@@ -199,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1823F7711BD1036D0005A629 /* mailshare_icon.png in Resources */,
+				187A95CC1BDE3B7300286176 /* StyleSettings.plist in Resources */,
 				1823F76B1BD1036D0005A629 /* whatsappshare_icon.png in Resources */,
 				186CC2F81BCDFD4B00C7402F /* LaunchScreen.storyboard in Resources */,
 				1823F76D1BD1036D0005A629 /* lineshare_icon.png in Resources */,
@@ -245,6 +250,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Objective-Clean Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then \n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\" \nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\" \nfi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

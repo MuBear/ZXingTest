@@ -19,9 +19,9 @@
 
 @implementation UIPasteboard(Line)
 
-+ (UIPasteboard *)generatePasteLineBoard
-{
++ (UIPasteboard *)generatePasteLineBoard {
     UIPasteboard *pasteboard;
+
     if ([[[UIDevice currentDevice] systemVersion] integerValue] < 7.0) {
         pasteboard = [UIPasteboard pasteboardWithName:@"jp.naver.linecamera.pasteboard" create:YES];
     } else {
@@ -290,7 +290,7 @@
     CGSize textSize = [self findHeightForText:text havingWidth:image.size.width - (point.x * 2) andFont:[UIFont systemFontOfSize:20.0]];
 
     UIGraphicsBeginImageContext(image.size);
-    [image drawInRect:CGRectMake((image.size.width - (image.size.height - textSize.height)) / 2 ,textSize.height , image.size.height - textSize.height, image.size.height - textSize.height)];
+    [image drawInRect:CGRectMake((image.size.width - (image.size.height - textSize.height)) / 2 , textSize.height , image.size.height - textSize.height, image.size.height - textSize.height)];
     CGRect rect = CGRectMake(point.x, point.y, image.size.width - (point.x * 2), image.size.height);
 
     [[UIColor whiteColor] set];
@@ -305,6 +305,7 @@
 
 - (CGSize)findHeightForText:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font {
     CGSize size = CGSizeZero;
+
     if (text) {
         //iOS 7
         CGRect frame = [text boundingRectWithSize:CGSizeMake(widthValue, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:font } context:nil];
@@ -380,6 +381,7 @@
         ZXResult *result = [reader decode:bitmap
                                     hints:hints
                                     error:&error];
+        
         if (result) {
             // The coded result as a string. The raw data can be accessed with
             // result.rawBytes and result.length.

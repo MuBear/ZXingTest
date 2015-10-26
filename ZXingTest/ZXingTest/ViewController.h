@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <ZXingObjC/ZXingObjC.h>
 
-@interface ViewController : UIViewController<ZXCaptureDelegate>
-
+@interface ViewController : UIViewController <ZXCaptureDelegate>
 
 @end
 
