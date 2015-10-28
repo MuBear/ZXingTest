@@ -10,6 +10,7 @@
 #import "LXActivity.h"
 #import <MessageUI/MessageUI.h>
 #import "Social/Social.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface UIPasteboard(Line)
 
@@ -344,8 +345,16 @@
         [self.capture stop];
         NSLog(@"result from format:%@", [self barcodeFormatToString:result.barcodeFormat]);
 
-        // Vibrate
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        //播放音效
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"qrcodeBeep" ofType:@"wav"];
+        SystemSoundID soundID;
+
+        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
+        AudioServicesPlaySystemSound(soundID);
+
+//        AudioServicesPlayAlertSound(soundID); 震動加音效
+//        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate); 僅震動
 
         // We got a result. Display information about the result onscreen.
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:result.text delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];

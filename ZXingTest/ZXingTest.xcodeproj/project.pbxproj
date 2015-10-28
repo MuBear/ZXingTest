@@ -25,6 +25,8 @@
 		186CC2F51BCDFD4B00C7402F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186CC2F41BCDFD4B00C7402F /* Assets.xcassets */; };
 		186CC2F81BCDFD4B00C7402F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186CC2F61BCDFD4B00C7402F /* LaunchScreen.storyboard */; };
 		187A95CC1BDE3B7300286176 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187A95CB1BDE3B7300286176 /* StyleSettings.plist */; };
+		18FCFCD31BE0764F0091D3DB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FCFCD21BE0764F0091D3DB /* AudioToolbox.framework */; };
+		18FCFCD81BE07EB00091D3DB /* qrcodeBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 18FCFCD71BE07EB00091D3DB /* qrcodeBeep.wav */; };
 		5334E6CEF0DECE937EF52D33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9F1C3D772A92A7CA9D8F0E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		186CC2F71BCDFD4B00C7402F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		186CC2F91BCDFD4B00C7402F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187A95CB1BDE3B7300286176 /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = "<group>"; };
+		18FCFCD21BE0764F0091D3DB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		18FCFCD71BE07EB00091D3DB /* qrcodeBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qrcodeBeep.wav; sourceTree = "<group>"; };
 		55F4850B635D604B91EC19D9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AF9F1C3D772A92A7CA9D8F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FCFCD31BE0764F0091D3DB /* AudioToolbox.framework in Frameworks */,
 				1823F7621BD1016E0005A629 /* Social.framework in Frameworks */,
 				5334E6CEF0DECE937EF52D33 /* libPods.a in Frameworks */,
 			);
@@ -109,6 +114,7 @@
 		186CC2E81BCDFD4B00C7402F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				18FCFCD71BE07EB00091D3DB /* qrcodeBeep.wav */,
 				187A95CB1BDE3B7300286176 /* StyleSettings.plist */,
 				1823F7631BD1036D0005A629 /* whatsappshare_icon.png */,
 				1823F7641BD1036D0005A629 /* whatsappshare_icon@2x.png */,
@@ -127,6 +133,7 @@
 		CBA309C4E977AB56A9D8BB4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18FCFCD21BE0764F0091D3DB /* AudioToolbox.framework */,
 				1823F7611BD1016E0005A629 /* Social.framework */,
 				AF9F1C3D772A92A7CA9D8F0E /* libPods.a */,
 			);
@@ -214,6 +221,7 @@
 				1823F76E1BD1036D0005A629 /* lineshare_icon@2x.png in Resources */,
 				186CC2F51BCDFD4B00C7402F /* Assets.xcassets in Resources */,
 				186CC2F31BCDFD4B00C7402F /* Main.storyboard in Resources */,
+				18FCFCD81BE07EB00091D3DB /* qrcodeBeep.wav in Resources */,
 				1823F7701BD1036D0005A629 /* fbshare_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
